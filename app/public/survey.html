@@ -28,16 +28,92 @@
         <hr>
         <h5>(1 = Strongly Disagree, 5 = Strongly Agree)</h5>
         <hr>
-        <h3>Question 1</h3>
-        <h4>You much prefer African to European swallows.</h4>
-        <form>
-            <label class="radio-inline"><input type="radio" name="q1" value="1">1</label>
-            <label class="radio-inline"><input type="radio" name="q1" value="2">2</label>
-            <label class="radio-inline"><input type="radio" name="q1" value="3">3</label>
-            <label class="radio-inline"><input type="radio" name="q1" value="4">4</label>
-            <label class="radio-inline"><input type="radio" name="q1" value="5">5</label>
-        </form>
+        <div class="row">
+            <div id="qContainer" class="col-md-12">
+                <!-- Question Template -->
+                <!-- <h3>Question 1</h3>
+                <h4>You much prefer African to European swallows.</h4>
+                <form>
+                    <label class="radio-inline"><input type="radio" name="q1" value="1">1</label>
+                    <label class="radio-inline"><input type="radio" name="q1" value="2">2</label>
+                    <label class="radio-inline"><input type="radio" name="q1" value="3">3</label>
+                    <label class="radio-inline"><input type="radio" name="q1" value="4">4</label>
+                    <label class="radio-inline"><input type="radio" name="q1" value="5">5</label>
+                </form> -->
+            </div>
+        </div>
+        <button type="button" class="btn btn-lg btn-primary">
+            <h4>Submit</h4>
+        </button>
     </div>
+
+    <script>
+        var questions = [
+            { 
+                q: "It's possible for a migratory swallow to carry a coconut."
+            },
+            {
+                q: "Your dream is to work in the ministry of silly walks."
+            },
+            {
+                q: "A pet shop owner has sold you a dead parrot. You immediately return to the store to complain."
+            },
+            {
+                q: "Ni!"
+            },
+            {
+                q: "You always look on the bright side of life."
+            },
+            {
+                q: "You take pleasure in ending comedy sketches when they get too silly."
+            },
+            {
+                q: "You always want to cast the first stone at a stoning."
+            },
+            {
+                q: "Even when all your limbs have been hacked off, you keep on fighting."
+            },
+            {
+                q: "You are a cross-dressing lumberjack."
+            },
+            {
+                q: "You enjoy visiting the argument clinic."
+            }
+        ];
+
+        for (i in questions) {
+            var qObj = questions[i];
+
+            var question = $("<div>");
+            question.addClass("row");
+
+            var textColumn = $("<div>");
+            textColumn.addClass("col-md-6");
+
+            var title = $("<h3>");
+            var qNum = parseInt(i) + 1;
+            title.text("Question " + qNum);
+            textColumn.append(title);
+            
+            var q = $("<h4>");
+            q.text(qObj.q);
+            textColumn.append(q);
+
+            var form = $("<form>");
+            var id = "q" + qNum;
+            form.attr("id", id);
+            for (j=1; j<=5; j++) {
+                var label = $("<label>");
+                label.addClass("radio-inline");
+                var html = '<input type="radio" name="q' + qNum + '" value="' + j + '">' + j;
+                label.html(html);
+                form.append(label);
+            }
+            textColumn.append(form);
+            question.append(textColumn);
+            $("#qContainer").append(question);
+        };
+    </script>
 </body>
 
 </html>
