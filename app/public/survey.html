@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Survey</title>
+    <title>The Survey</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
@@ -42,10 +42,16 @@
                 </form> -->
             </div>
         </div>
-        <button type="button" class="btn btn-lg btn-primary">
+        <button type="button" id="submit" class="btn btn-lg btn-primary" disabled>
             <h4>Submit</h4>
         </button>
     </div>
+    <hr>
+    <p>
+        <a href="/api/friendslist">API Friends List</a>
+         | 
+        <a href="github">GitHub Repo</a>
+    </p>
 
     <script>
         var questions = [
@@ -81,6 +87,18 @@
             }
         ];
 
+        function getQAnswers() {
+            var answers = [];
+            for (var k = 0; k < questions.length; k++) {
+                var qNum = parseInt(k) + 1;
+                var name = "q" + qNum;
+                var selectedRadio = "input[name='" + name + "']:checked"
+                var answer = $(selectedRadio).val();
+                answers.push(answer);
+            }
+            return answers;
+        }
+
         for (i in questions) {
             var qObj = questions[i];
 
@@ -105,7 +123,8 @@
             for (j=1; j<=5; j++) {
                 var label = $("<label>");
                 label.addClass("radio-inline");
-                var html = '<input type="radio" name="q' + qNum + '" value="' + j + '">' + j;
+                label.addClass("mx-2");
+                var html = '<input type="radio" class="mx-2 radio" name="q' + qNum + '" value="' + j + '">' + j;
                 label.html(html);
                 form.append(label);
             }
@@ -113,6 +132,34 @@
             question.append(textColumn);
             $("#qContainer").append(question);
         };
+
+        $(".radio").change(function() {
+            var answers = getQAnswers();
+            var unansweredQsExist = false;
+            for (i in answers) {
+                if(!answers[i]) {
+                    unansweredQsExist = true;
+                }
+            }
+            var formsUnfilled = ($("#name").val() === "" || $("#photo").val() === "");
+            if (!unansweredQsExist && !formsUnfilled) {
+                $("#submit").removeAttr("disabled")
+            }
+        })
+
+        $("#submit").on("click", function(event) {
+            var newFriend = {
+                name: $("#name").val(),
+                photo: $("#photo").val(),
+                answers: []
+            }
+
+            var answers = getQAnswers();
+            newFriend.answers = answers;
+            console.log(newFriend);
+        });
+
+
     </script>
 </body>
 
