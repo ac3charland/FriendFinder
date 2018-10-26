@@ -22,3 +22,7 @@ This app serves as a personality test to find your ideal Monty Python viewing pa
 
 --Eric Idle as Arthur Nudge
 
+>"I wasn't expecting the lack of 'Spanish Inquisition' references."
+--Terry Gilliam as one of the Spanish Inquisitors
+
+
