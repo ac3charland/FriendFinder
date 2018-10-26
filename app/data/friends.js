@@ -22,7 +22,12 @@ var friends = [
     {
         name: "Terry Gilliam",
         photo: "http://static.bafta.org/images/originals/terry-gilliam-archive-bbc-2946.jpg",
-        answers: [5, 3, 3, 1, 3, 3, 3, 3, 1, 3]
+        answers: [5, 1, 5, 1, 5, 1, 5, 1, 1, 5]
+    },
+    {
+        name: "Eric Idle",
+        photo: "http://imasportsphile.com/wp-content/uploads/2018/10/huge_avatar.jpg",
+        answers: [1, 3, 4, 1, 5, 1, 4, 2, 1, 3]
     }
 ]
 
